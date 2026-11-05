@@ -2,8 +2,7 @@
 
 DE1009 Teorías Críticas del Derecho desde América Latina · Doctorado UASB.
 
-- `index.html`: página de inicio (mesas, documento de posturas, herramientas docentes, agenda).
-- `tarjetas.html`: las cinco tarjetas del laboratorio (`#mesa-1` … `#mesa-5`).
-- `lienzo.html`: diapositivas de la sesión (flechas, F pantalla completa, N notas, I índice).
-
-El Tribunal (Profe IA) funciona en Claude y se abre desde el enlace de la página de inicio.
+- `index.html`: la presentación de la sesión (flechas para avanzar, F pantalla completa, N notas, I índice). Los enlaces a las tarjetas, al documento de posturas y al Tribunal aparecen dentro de las diapositivas.
+- `mesas.html`: página para los estudiantes en el laboratorio (tarjetas y documento de posturas).
+- `tarjetas.html`: las cinco tarjetas (`#mesa-1` … `#mesa-5`).
+- `docentes.html`: panel docente con enlaces y guía de uso.

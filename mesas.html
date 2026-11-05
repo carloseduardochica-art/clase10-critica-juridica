@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mesas · Clase 10</title>
+<meta name="description" content="Centro de la Clase 10 del Doctorado en Derecho UASB: tarjetas de las mesas, documento de posturas, lienzo y Tribunal.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: cabecera con la tesis; dos columnas (estudiantes / docentes); agenda de 100 minutos al pie */
+:root{
+  --bg:#EEF0F6; --surface:#FFFFFF; --fg:#121933; --muted:#4F5A7A; --line:#D3D9E8;
+  --cyan:#0A6FAE; --violet:#5A3FD0; --violet-soft:#EEEAFC; --amber:#9A5A00; --amber-soft:#FBF0DD; --on-accent:#FFFFFF;
+  --display:"Newsreader",Georgia,serif; --body:"Archivo","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#080C1C; --surface:#0F1631; --fg:#EEF2FF; --muted:#9CA8CA; --line:#27315A;
+  --cyan:#45D3FF; --violet:#A08BFF; --violet-soft:#1D1A44; --amber:#F5B84A; --amber-soft:#2E2412; --on-accent:#0B1024;
+  color-scheme:dark;
+}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+
+header{padding-block:44px 30px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin:0 0 12px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:0;max-width:20ch;text-wrap:balance}
+h1 em{font-style:italic;color:var(--amber)}
+.thesis{font-family:var(--display);font-size:1.2rem;color:var(--muted);margin:16px 0 0;max-width:56ch}
+.who{font-size:.85rem;color:var(--muted);margin:14px 0 0}
+
+main{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;padding-block:30px}
+section h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 4px}
+.lede{color:var(--muted);font-size:.92rem;margin:0 0 16px;max-width:60ch}
+
+.mesas{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.mesa{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--violet);border-radius:10px;padding:14px 16px;min-width:0}
+.mesa:hover{border-color:var(--violet)}
+.mesa .n{font-family:var(--display);font-size:2.2rem;line-height:.9;color:var(--violet)}
+.mesa .t{font-family:var(--display);font-size:1.02rem;line-height:1.25}
+.mesa .go{font-size:.75rem;color:var(--muted);margin-top:auto}
+
+.doc{display:flex;gap:16px;align-items:center;margin-top:14px;text-decoration:none;background:var(--violet);color:var(--on-accent);border-radius:12px;padding:18px 20px}
+.doc b{display:block;font-size:1.08rem}
+.doc span{font-size:.85rem;opacity:.9}
+.doc .arrow{margin-left:auto;font-size:1.5rem}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.steps span{font-family:var(--mono);font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted)}
+.steps b{color:var(--fg)}
+
+.tools{display:flex;flex-direction:column;gap:10px}
+.tool{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.tool:hover{border-color:var(--cyan)}
+.tool .ic{grid-row:span 2;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--cyan);border:1px solid var(--line);border-radius:6px;padding:6px 7px;text-align:center;min-width:3.4em}
+.tool b{font-size:.98rem}
+.tool small{grid-column:2;color:var(--muted);font-size:.8rem}
+.tool .ext{grid-row:span 2;color:var(--muted);font-size:.8rem}
+.tool.main{border-color:var(--amber);background:var(--amber-soft)}
+.tool.main .ic{color:var(--amber);border-color:var(--amber)}
+.note{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+.agenda{border-top:1px solid var(--line);padding-block:26px 40px}
+.agenda h2{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 14px}
+.bar{display:flex;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.seg{padding:12px 12px;background:var(--surface);border-right:1px solid var(--line);min-width:0}
+.seg:last-child{border-right:0}
+.seg .tm{font-family:var(--mono);font-size:.68rem;color:var(--cyan);font-variant-numeric:tabular-nums}
+.seg b{display:block;font-size:.88rem;line-height:1.25;margin-top:2px}
+.seg small{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
+.seg.hot{background:var(--violet-soft)}
+
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.start{background:var(--amber);color:var(--on-accent);text-decoration:none;font-weight:700;font-size:1.05rem;padding:14px 22px;border-radius:10px}
+.start:hover{filter:brightness(1.08)}
+.how{color:var(--cyan);font-weight:600;font-size:.92rem;text-decoration:none}
+.como{border-top:1px solid var(--line);padding-block:28px 6px}
+.como h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 4px}
+.pasos{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pasos li{display:grid;grid-template-columns:5.2em 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.pasos .tm{font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--cyan);padding-top:2px}
+.pasos b{font-size:1rem}
+.pasos p{margin:3px 0 0;color:var(--muted);font-size:.9rem;max-width:72ch}
+kbd{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;color:var(--fg)}
+footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
+
+@media (max-width:860px){main{grid-template-columns:1fr}.bar{flex-direction:column}.seg{border-right:0;border-bottom:1px solid var(--line)}.seg:last-child{border-bottom:0}.seg{flex:none!important}}
+main.solo{grid-template-columns:1fr}
+.solo .mesas{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Clase 10 · Laboratorio de disección</p>
+    <h1>Crítica e <em>historicidad</em> de lo jurídico</h1>
+    <p class="thesis">Busquen su mesa, abran la tarjeta y escriban la postura en el documento compartido.</p>
+  </div>
+</header>
+<main class="wrap solo">
+<section aria-labelledby="h-est">
+    <h2 id="h-est">Su mesa</h2>
+    <p class="lede">Abran la tarjeta de su mesa: tiene las lecturas, el mito a desmontar y la pregunta de demolición. La postura se escribe en el documento compartido.</p>
+    <div class="mesas">
+      <a class="mesa" href="tarjetas.html#mesa-1"><span class="n">1</span><span class="t">El aire y la atmósfera como sujeto de protección especial</span><span class="go">Abrir tarjeta →</span></a>
+      <a class="mesa" href="tarjetas.html#mesa-2"><span class="n">2</span><span class="t">Derecho a la ciudad y exclusión espacial</span><span class="go">Abrir tarjeta →</span></a>
+      <a class="mesa" href="tarjetas.html#mesa-3"><span class="n">3</span><span class="t">Movimientos sociales, filosofías de la liberación y minorías parlamentarias</span><span class="go">Abrir tarjeta →</span></a>
+      <a class="mesa" href="tarjetas.html#mesa-4"><span class="n">4</span><span class="t">Soberanía y crisis del derecho internacional público</span><span class="go">Abrir tarjeta →</span></a>
+      <a class="mesa" href="tarjetas.html#mesa-5"><span class="n">5</span><span class="t">Soberanía alimentaria en Ecuador e inteligencia artificial en el derecho</span><span class="go">Abrir tarjeta →</span></a>
+    </div>
+    <a class="doc" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">
+      <div><b>Escribir la postura de la mesa</b><span>Documento compartido · cada mesa en su sección · lo escribe el relator</span></div>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+    <div class="steps"><span><b>8′</b> leer y discutir</span><span><b>4′</b> escribir la postura</span><span><b>min 50</b> el portavoz la defiende ante el Tribunal</span></div>
+  </section>
+</main>
+</body>
+</html>

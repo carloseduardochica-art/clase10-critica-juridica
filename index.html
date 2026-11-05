@@ -2,163 +2,521 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clase 10 · Crítica e historicidad de lo jurídico</title>
-<meta name="description" content="Centro de la Clase 10 del Doctorado en Derecho UASB: tarjetas de las mesas, documento de posturas, lienzo y Tribunal.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-/* Layout: cabecera con la tesis; dos columnas (estudiantes / docentes); agenda de 100 minutos al pie */
+/* Lienzo de proyección: escenario 16:9 escalado a la ventana; un panel por diapositiva */
 :root{
-  --bg:#EEF0F6; --surface:#FFFFFF; --fg:#121933; --muted:#4F5A7A; --line:#D3D9E8;
-  --cyan:#0A6FAE; --violet:#5A3FD0; --violet-soft:#EEEAFC; --amber:#9A5A00; --amber-soft:#FBF0DD; --on-accent:#FFFFFF;
-  --display:"Newsreader",Georgia,serif; --body:"Archivo","Segoe UI",Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
-  color-scheme:light;
+  --bg:#070b1a; --stage:#0c1330; --ink:#eef2ff; --muted:#9aa6c8; --line:#26305a;
+  --cyan:#3fd6ff; --violet:#9b7bff; --amber:#f5b84a; --rose:#ff7fb3;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: "Segoe UI", Arial, Helvetica, sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
-  --bg:#080C1C; --surface:#0F1631; --fg:#EEF2FF; --muted:#9CA8CA; --line:#27315A;
-  --cyan:#45D3FF; --violet:#A08BFF; --violet-soft:#1D1A44; --amber:#F5B84A; --amber-soft:#2E2412; --on-accent:#0B1024;
-  color-scheme:dark;
-}}
+body.claro{ --bg:#e9edf6; --stage:#ffffff; --ink:#111a33; --muted:#4d5878; --line:#d5dbea;
+  --cyan:#0a74b8; --violet:#5a3fd0; --amber:#a86200; --rose:#b8336f; }
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-a{color:inherit}
-a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden}
+#wrap{position:fixed;inset:0}
+#stage{width:1600px;height:900px;background:var(--stage);position:absolute;left:50%;top:50%;overflow:hidden;
+  transform-origin:center center;border-radius:6px;box-shadow:0 0 0 1px var(--line)}
+body.claro #stage{box-shadow:0 10px 40px rgba(20,30,60,.12)}
+.slide{position:absolute;inset:0;padding:64px 110px 96px;display:none;flex-direction:column}
+.slide.on{display:flex;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide.on{animation:none}}
 
-header{padding-block:44px 30px;border-bottom:1px solid var(--line)}
-.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin:0 0 12px}
-h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:0;max-width:20ch;text-wrap:balance}
+.tag{font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin:0 0 18px;font-weight:600}
+h1{font-family:var(--serif);font-weight:400;font-size:84px;line-height:1.08;margin:0;max-width:22ch;text-wrap:balance}
 h1 em{font-style:italic;color:var(--amber)}
-.thesis{font-family:var(--display);font-size:1.2rem;color:var(--muted);margin:16px 0 0;max-width:56ch}
-.who{font-size:.85rem;color:var(--muted);margin:14px 0 0}
+h2{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.12;margin:0 0 24px;max-width:24ch;text-wrap:balance}
+p.lead{font-size:34px;line-height:1.45;color:var(--muted);max-width:42ch;margin:28px 0 0}
+ul.pts{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:18px;max-width:66ch}
+ul.pts li{font-size:29px;line-height:1.36;padding-left:38px;position:relative}
+ul.pts li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50%;background:var(--cyan)}
+ul.pts li b{color:var(--ink)}
+ul.pts li span{color:var(--muted)}
+.big{font-family:var(--serif);font-size:50px;line-height:1.3;max-width:28ch;text-wrap:balance}
+.big em{color:var(--amber);font-style:italic}
+.src{margin-top:auto;padding-top:14px;font-size:20px;color:var(--muted)}
 
-main{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;padding-block:30px}
-section h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 4px}
-.lede{color:var(--muted);font-size:.92rem;margin:0 0 16px;max-width:60ch}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:10px}
+.col{border:1px solid var(--line);border-top:5px solid var(--cyan);border-radius:12px;padding:30px}
+.col:nth-child(2){border-top-color:var(--violet)} .col:nth-child(3){border-top-color:var(--amber)}
+.col h3{font-family:var(--serif);font-weight:400;font-size:38px;margin:0 0 6px}
+.col small{display:block;font-size:20px;color:var(--muted);margin-bottom:18px}
+.col p{font-size:26px;line-height:1.42;margin:0}
 
-.mesas{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
-.mesa{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--violet);border-radius:10px;padding:14px 16px;min-width:0}
-.mesa:hover{border-color:var(--violet)}
-.mesa .n{font-family:var(--display);font-size:2.2rem;line-height:.9;color:var(--violet)}
-.mesa .t{font-family:var(--display);font-size:1.02rem;line-height:1.25}
-.mesa .go{font-size:.75rem;color:var(--muted);margin-top:auto}
+.divider{justify-content:center}
+.divider .num{font-family:var(--serif);font-size:200px;line-height:1;color:var(--cyan);opacity:.9}
+.divider .time{font-size:30px;color:var(--muted);margin-top:24px;letter-spacing:.06em}
 
-.doc{display:flex;gap:16px;align-items:center;margin-top:14px;text-decoration:none;background:var(--violet);color:var(--on-accent);border-radius:12px;padding:18px 20px}
-.doc b{display:block;font-size:1.08rem}
-.doc span{font-size:.85rem;opacity:.9}
-.doc .arrow{margin-left:auto;font-size:1.5rem}
-.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.steps span{font-family:var(--mono);font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted)}
-.steps b{color:var(--fg)}
+.grupo .head{display:flex;align-items:baseline;gap:26px;margin-bottom:26px}
+.grupo .gn{font-family:var(--serif);font-size:120px;line-height:.9;color:var(--violet)}
+.grupo .gt{font-family:var(--serif);font-size:48px;line-height:1.15;max-width:26ch}
+.grupo .auth{font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:22px}
+.box{border-radius:12px;padding:24px 30px;font-size:28px;line-height:1.42}
+.box.mito{border:1px solid var(--line);color:var(--muted);margin-bottom:22px}
+.box.mito b{color:var(--amber);font-size:20px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+.box.dem{background:rgba(155,123,255,.12);border-left:6px solid var(--violet);font-family:var(--serif);font-size:34px}
+body.claro .box.dem{background:rgba(90,63,208,.07)}
+.box.dem b{font-family:var(--sans);color:var(--violet);font-size:20px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:8px}
 
-.tools{display:flex;flex-direction:column;gap:10px}
-.tool{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.tool:hover{border-color:var(--cyan)}
-.tool .ic{grid-row:span 2;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.06em;color:var(--cyan);border:1px solid var(--line);border-radius:6px;padding:6px 7px;text-align:center;min-width:3.4em}
-.tool b{font-size:.98rem}
-.tool small{grid-column:2;color:var(--muted);font-size:.8rem}
-.tool .ext{grid-row:span 2;color:var(--muted);font-size:.8rem}
-.tool.main{border-color:var(--amber);background:var(--amber-soft)}
-.tool.main .ic{color:var(--amber);border-color:var(--amber)}
-.note{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:20px}
+.step{border:1px solid var(--line);border-radius:12px;padding:30px}
+.step .m{font-family:var(--serif);font-size:70px;color:var(--cyan);line-height:1}
+.step .l{font-size:28px;margin-top:12px;line-height:1.35}
 
-.agenda{border-top:1px solid var(--line);padding-block:26px 40px}
-.agenda h2{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0 0 14px}
-.bar{display:flex;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
-.seg{padding:12px 12px;background:var(--surface);border-right:1px solid var(--line);min-width:0}
-.seg:last-child{border-right:0}
-.seg .tm{font-family:var(--mono);font-size:.68rem;color:var(--cyan);font-variant-numeric:tabular-nums}
-.seg b{display:block;font-size:.88rem;line-height:1.25;margin-top:2px}
-.seg small{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
-.seg.hot{background:var(--violet-soft)}
+.video{flex:1;display:flex;flex-direction:column;gap:20px}
+.video video,.video iframe{width:100%;height:560px;flex:none;background:#000;border-radius:10px;border:0}
+.vrow{display:flex;align-items:center;gap:18px}.vhint{font-size:18px;color:var(--muted)}
+.vbtn{align-self:flex-start;font:inherit;font-size:24px;padding:14px 22px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.vbtn:hover{border-color:var(--cyan)}
 
-.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
-.start{background:var(--amber);color:var(--on-accent);text-decoration:none;font-weight:700;font-size:1.05rem;padding:14px 22px;border-radius:10px}
-.start:hover{filter:brightness(1.08)}
-.how{color:var(--cyan);font-weight:600;font-size:.92rem;text-decoration:none}
-.como{border-top:1px solid var(--line);padding-block:28px 6px}
-.como h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 4px}
-.pasos{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
-.pasos li{display:grid;grid-template-columns:5.2em 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.pasos .tm{font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--cyan);padding-top:2px}
-.pasos b{font-size:1rem}
-.pasos p{margin:3px 0 0;color:var(--muted);font-size:.9rem;max-width:72ch}
-kbd{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;color:var(--fg)}
-footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
 
-@media (max-width:860px){main{grid-template-columns:1fr}.bar{flex-direction:column}.seg{border-right:0;border-bottom:1px solid var(--line)}.seg:last-child{border-bottom:0}.seg{flex:none!important}}
+.lectura .lq{display:flex;flex-direction:column;gap:24px;margin-top:6px}
+.lectura .q{border-left:5px solid var(--cyan);padding:6px 0 6px 28px}
+.lectura .q p{font-family:var(--serif);font-size:29px;line-height:1.42;margin:0}
+.lectura .q.par{border-left-color:var(--line)}
+.lectura .q.par p{font-family:var(--sans);font-style:italic;color:var(--muted);font-size:26px}
+.lectura .q cite{display:block;font-style:normal;font-size:19px;color:var(--muted);margin-top:8px;letter-spacing:.02em}
+.lectura .q.par cite::before{content:"Paráfrasis · ";color:var(--amber)}
+
+
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:20px}
+.fs{flex:1;border:1px solid var(--line);border-radius:12px;padding:24px}
+.fs .m{font-family:var(--serif);font-size:62px;color:var(--cyan);line-height:1}
+.fs .l{font-size:23px;line-height:1.35;margin-top:12px;color:var(--muted)}
+.fs .l b{display:block;color:var(--ink);font-size:27px;margin-bottom:6px}
+.fs.out{border-color:var(--amber)} .fs.out .m{color:var(--amber)}
+.fa{align-self:center;font-size:40px;color:var(--muted)}
+.mapa{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:6px;flex:1}
+.mesa{border:1px solid var(--line);border-top:5px solid var(--violet);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.mesa .mn{font-family:var(--serif);font-size:76px;line-height:.9;color:var(--violet)}
+.mesa .mt{font-family:var(--serif);font-size:25px;line-height:1.2}
+.mesa .ma{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+.mesa .mq{font-size:19px;line-height:1.38;color:var(--muted);margin-top:auto}
+.plant{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.pf{display:flex;gap:22px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:18px 24px}
+.pf span{font-family:var(--serif);font-size:48px;line-height:1;color:var(--amber);min-width:36px}
+.pf p{margin:0;font-size:28px;line-height:1.38;color:var(--muted)} .pf p b{color:var(--ink)}
+.roles{margin-top:auto;font-size:24px;color:var(--muted)} .roles span{color:var(--cyan);font-weight:600}
+.crono{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.cfase{font-size:34px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+.cnum{font-family:var(--serif);font-size:230px;line-height:1;font-variant-numeric:tabular-nums}
+.cbar{width:80%;height:16px;border-radius:8px;background:var(--line);overflow:hidden;position:relative}
+.cbar div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet))}
+.cbar::after{content:"";position:absolute;left:66.6%;top:0;bottom:0;width:3px;background:var(--amber)}
+.cleg{width:80%;display:flex;font-size:20px;color:var(--muted)} .cleg span:first-child{width:66.6%}
+.turno{display:flex;gap:14px;margin-top:auto} .turno span{border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:20px;color:var(--muted)}
+
+/* enlaces dentro de las diapositivas */
+.lbtn{display:inline-flex;align-items:center;gap:14px;text-decoration:none;font-size:26px;font-weight:600;padding:16px 26px;border-radius:12px;border:2px solid var(--violet);color:var(--ink);background:rgba(155,123,255,.12)}
+.lbtn:hover{background:rgba(155,123,255,.25)}
+.lbtn.amber{border-color:var(--amber);background:rgba(245,184,74,.12)}
+.lbtn.amber:hover{background:rgba(245,184,74,.25)}
+.lrow{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:22px}
+.lurl{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:22px;color:var(--cyan);border:1px dashed var(--line);border-radius:10px;padding:12px 18px;user-select:all}
+a.mesa{text-decoration:none;color:inherit}
+a.mesa:hover{border-color:var(--violet)}
+.turno a{border:1px solid var(--amber);border-radius:999px;padding:8px 18px;font-size:20px;color:var(--amber);text-decoration:none;margin-left:auto}
+/* barra inferior del lienzo */
+#hud{position:absolute;left:0;right:0;bottom:0;height:70px;display:flex;align-items:center;gap:22px;padding:0 40px;border-top:1px solid var(--line);font-size:20px;color:var(--muted)}
+#hud .blk{color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+#hud .sp{flex:1}
+#prog{position:absolute;left:0;bottom:70px;height:4px;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .3s}
+
+/* controles flotantes (fuera del escenario, no se proyectan escalados) */
+#ctl{position:fixed;right:18px;bottom:18px;display:flex;gap:8px;z-index:10;opacity:.25;transition:opacity .2s}
+#ctl:hover,#ctl:focus-within{opacity:1}
+#ctl button{font:inherit;font-size:15px;padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--stage);color:var(--ink);cursor:pointer}
+#ctl button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+#ctl .main{font-size:20px;padding:10px 20px}
+
+#notes{position:fixed;left:18px;bottom:18px;max-width:560px;background:var(--stage);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:10px;padding:14px 18px;font-size:16px;line-height:1.5;z-index:10;display:none}
+#notes b{color:var(--amber)}
+body.notas #notes{display:block}
+
+#menu{position:fixed;inset:0;background:rgba(5,8,20,.92);z-index:20;display:none;place-items:center}
+body.claro #menu{background:rgba(233,237,246,.96)}
+#menu.on{display:grid}
+#menu .in{width:min(900px,92vw);max-height:86vh;overflow:auto;background:var(--stage);border:1px solid var(--line);border-radius:14px;padding:26px}
+#menu h4{margin:0 0 14px;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+#menu button{display:flex;gap:14px;width:100%;text-align:left;font:inherit;font-size:17px;padding:10px 12px;border:0;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer}
+#menu button:hover,#menu button:focus-visible{background:rgba(63,214,255,.12);outline:none}
+#menu button span{color:var(--muted);width:2.4em;flex:none}
+#help{position:fixed;top:14px;right:18px;font-size:13px;color:var(--muted);opacity:.0;transition:opacity .3s;z-index:9}
+body:hover #help{opacity:.55}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <p class="eyebrow">DE1009 · Teorías Críticas del Derecho desde América Latina · Doctorado UASB</p>
-    <h1>Clase 10 · Crítica e <em>historicidad</em> de lo jurídico</h1>
-    <p class="thesis">La crítica que no retorna a lo concreto se degrada.</p>
-    <p class="who">Codirección: Carlos Eduardo Chica-Villacís y María Cobo · Docente titular: Dr. Marco Tulio Navas Alvear</p>
-    <div class="cta">
-      <a class="start" href="lienzo.html">▶ Iniciar la presentación</a>
-      <a class="how" href="#como">Cómo se usa el lunes ↓</a>
-    </div>
-  </div>
-</header>
+<div id="wrap"><div id="stage">
 
-<main class="wrap">
-  <section aria-labelledby="h-est">
-    <h2 id="h-est">Para las mesas</h2>
-    <p class="lede">Abran la tarjeta de su mesa: tiene las lecturas, el mito a desmontar y la pregunta de demolición. La postura se escribe en el documento compartido.</p>
-    <div class="mesas">
-      <a class="mesa" href="tarjetas.html#mesa-1"><span class="n">1</span><span class="t">El aire y la atmósfera como sujeto de protección especial</span><span class="go">Abrir tarjeta →</span></a>
-      <a class="mesa" href="tarjetas.html#mesa-2"><span class="n">2</span><span class="t">Derecho a la ciudad y exclusión espacial</span><span class="go">Abrir tarjeta →</span></a>
-      <a class="mesa" href="tarjetas.html#mesa-3"><span class="n">3</span><span class="t">Movimientos sociales, filosofías de la liberación y minorías parlamentarias</span><span class="go">Abrir tarjeta →</span></a>
-      <a class="mesa" href="tarjetas.html#mesa-4"><span class="n">4</span><span class="t">Soberanía y crisis del derecho internacional público</span><span class="go">Abrir tarjeta →</span></a>
-      <a class="mesa" href="tarjetas.html#mesa-5"><span class="n">5</span><span class="t">Soberanía alimentaria en Ecuador e inteligencia artificial en el derecho</span><span class="go">Abrir tarjeta →</span></a>
-    </div>
-    <a class="doc" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">
-      <div><b>Escribir la postura de la mesa</b><span>Documento compartido · cada mesa en su sección · lo escribe el relator</span></div>
-      <span class="arrow" aria-hidden="true">→</span>
-    </a>
-    <div class="steps"><span><b>8′</b> leer y discutir</span><span><b>4′</b> escribir la postura</span><span><b>min 50</b> el portavoz la defiende ante el Tribunal</span></div>
-  </section>
-
-  <section aria-labelledby="h-doc">
-    <h2 id="h-doc">Para docentes</h2>
-    <p class="lede">Lo que se abre y se comparte en Zoom.</p>
-    <div class="tools">
-      <a class="tool main" href="lienzo.html"><span class="ic">16:9</span><b>Presentación de la clase</b><small>Las diapositivas de los 100 minutos, con el video y el reloj</small><span class="ext">→</span></a>
-      <a class="tool main" target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka"><span class="ic">IA</span><b>Tribunal Epistemológico</b><small>Profe IA en Claude: pegar la postura y pulsar «Tribunal, evalúa»</small><span class="ext">↗</span></a>
-      <a class="tool" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1k9Vsl7b-mFRBeLXdo-Qv2QAYN9qPIoysQ8QCrBY-aLg/edit"><span class="ic">DOC</span><b>Guía para el lunes</b><small>Paso a paso, enlaces y pendientes</small><span class="ext">↗</span></a>
-      <a class="tool" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1FYSO983o7z1hVwWJ4yMdnhNY8hzFZ1uy/view"><span class="ic">MP4</span><b>Video Vox</b><small>«La ilusión de la pureza» · 3:30</small><span class="ext">↗</span></a>
-    </div>
-    <p class="note">El Tribunal funciona dentro de Claude con la cuenta de Carlos Eduardo. Si falla, la misma página tiene el botón «Usar golpes preparados».</p>
-  </section>
-</main>
-
-
-<section class="como wrap" id="como" aria-labelledby="h-como">
-  <h2 id="h-como">Cómo se usa el lunes</h2>
-  <p class="lede">Una sola regla: <b>la presentación manda</b>. Se comparte en Zoom desde el inicio y las demás piezas se abren solo cuando la presentación lo indica.</p>
-  <ol class="pasos">
-    <li><span class="tm">Antes</span><div><b>Abrir tres pestañas</b><p>Esta página, la presentación y el Tribunal. En Zoom: compartir la pestaña de la presentación y pedir en el chat que cada uno se renombre «M1 – Nombre».</p></div></li>
-    <li><span class="tm">00–35</span><div><b>Presentación</b><p>Avanzar con las flechas del teclado. La tecla <kbd>F</kbd> pone pantalla completa y <kbd>N</kbd> muestra las notas para docentes. El video está en la diapositiva 4.</p></div></li>
-    <li><span class="tm">35–50</span><div><b>Laboratorio en salas</b><p>Pegar en el chat el enlace de esta página. Abrir 5 salas de Zoom de 12 minutos. Cada mesa abre su tarjeta y su relator escribe la postura en el documento compartido. En la presentación queda el reloj de 12 minutos.</p></div></li>
-    <li><span class="tm">50–85</span><div><b>Tribunal</b><p>Por cada mesa: el portavoz lee su postura (2′). Se cambia a la pestaña del Tribunal, se pega la postura copiada del documento y se pulsa «Tribunal, evalúa» (1′30″). La mesa replica (3′30″).</p></div></li>
-    <li><span class="tm">85–100</span><div><b>Cierre</b><p>Volver a la presentación. En el Tribunal, «Copiar dossier» y pegarlo en el chat de Zoom.</p></div></li>
-  </ol>
+<!-- ============ PORTADA ============ -->
+<section class="slide" data-blk="Inicio" data-t="—"
+ data-n="<b>Antes de empezar:</b> dejar abiertos el Tribunal, las tarjetas y el documento de posturas. Pedir en el chat que se renombren «M1 – Nombre».">
+  <p class="tag">DE1009 · Teorías Críticas del Derecho desde América Latina · Doctorado UASB</p>
+  <h1>Clase 10<br>Crítica e <em>historicidad</em> de lo jurídico</h1>
+  <p class="lead">Codirección: Carlos Eduardo Chica-Villacís y María Cobo<br>Docente titular: Dr. Marco Tulio Navas Alvear</p>
 </section>
 
-<section class="agenda wrap" aria-labelledby="h-ag">
-  <h2 id="h-ag">La sesión en 100 minutos</h2>
-  <div class="bar">
-    <div class="seg" style="flex:15"><span class="tm">00–15</span><b>Provocación</b><small>Video y desmontaje de la neutralidad</small></div>
-    <div class="seg" style="flex:20"><span class="tm">15–35</span><b>Trípode</b><small>Ellacuría · Tapia · Wolkmer y Correas</small></div>
-    <div class="seg hot" style="flex:15"><span class="tm">35–50</span><b>Laboratorio</b><small>Cinco mesas en salas de Zoom</small></div>
-    <div class="seg hot" style="flex:35"><span class="tm">50–85</span><b>Tribunal</b><small>7 minutos por mesa: portavoz, Tribunal, réplica</small></div>
-    <div class="seg" style="flex:15"><span class="tm">85–100</span><b>Cierre</b><small>Dossier y cierre a dos voces</small></div>
+<!-- ============ BLOQUE 1 ============ -->
+<section class="slide divider" data-blk="Bloque 1 · Provocación" data-t="00:00 – 15:00"
+ data-n="<b>Carlos Eduardo · 3 min.</b> Hablar sin diapositivas detrás: no venimos a resumir, venimos a someter nuestras tesis a una prueba de ácido.">
+  <div class="num">1</div>
+  <h2>Provocación audiovisual y desmontaje de la neutralidad</h2>
+  <div class="time">00:00 – 15:00</div>
+</section>
+
+<section class="slide" data-blk="Bloque 1 · Provocación" data-t="00:00"
+ data-n="<b>Carlos Eduardo.</b> Dejar la pregunta en pantalla y el silencio unos segundos antes del video.">
+  <p class="tag">Pregunta de apertura</p>
+  <p class="big">¿Qué <em>da de sí</em> el derecho que investigamos, aquí, hoy, y para quiénes?</p>
+</section>
+
+<section class="slide" data-blk="Bloque 1 · Provocación" data-t="03:00 – 06:30"
+ data-n="<b>Video Vox, 3:30.</b> Luces bajas. Al terminar no se pasa de diapositiva: toma la palabra María Cobo.">
+  <p class="tag">Video · La ilusión de la pureza</p>
+  <div class="video">
+    <div class="vrow"><button class="vbtn" id="pick">📂 Plan B: cargar el MP4 desde el equipo</button><span class="vhint">Si no carga desde Drive, use el archivo local «Video_Vox_Clase10_Doctorado_UASB.mp4».</span></div>
+    <input type="file" id="vfile" accept="video/*" hidden>
+    <iframe id="voxdrive" src="https://drive.google.com/file/d/1FYSO983o7z1hVwWJ4yMdnhNY8hzFZ1uy/preview" allow="autoplay; fullscreen" allowfullscreen title="Video Vox"></iframe>
+    <video id="vox" controls preload="metadata" hidden><source src="Video_Vox_Clase10_Doctorado_UASB.mp4" type="video/mp4"></video>
   </div>
 </section>
 
-<footer class="wrap">Trípode: Ellacuría, <i>ECA</i> 45/502 (1990) · Tapia Argüello, <i>Nuestrapraxis</i> 2/3 (2018) · Wolkmer, en <i>Crítica jurídica y política en Nuestra América</i> 2, CLACSO (2020).</footer>
+<section class="slide" data-blk="Bloque 1 · Provocación" data-t="06:30 – 11:00"
+ data-n="<b>María Cobo · 4:30.</b> Genealogía crítica: del video a Foucault y Bourdieu, vía Orler.">
+  <p class="tag">Genealogía crítica</p>
+  <h2>El derecho no nació como una geometría pura</h2>
+  <ul class="pts">
+    <li><b>Objetivación y monopolización de saberes</b> <span>— Bourdieu</span></li>
+    <li><b>Construcción disciplinar</b> <span>— Foucault</span></li>
+    <li>Resultado: el saber jurídico se le expropia a la sociedad civil, y el derecho se presenta como <b>técnico, distante y ajeno</b>.</li>
+  </ul>
+  <p class="src">Recuperado por José Orler</p>
+</section>
+
+<section class="slide" data-blk="Bloque 1 · Provocación" data-t="11:00 – 15:00"
+ data-n="<b>Carlos Eduardo · 4 min.</b> Blindar el uso de IA: un modelo comercial responde por defecto desde el normativismo. Por eso hoy se historiza antes de encenderlo.">
+  <p class="tag">El dispositivo de hoy</p>
+  <h2>No traemos un oráculo digital</h2>
+  <ul class="pts">
+    <li>Por defecto, un modelo comercial <b>finge neutralidad</b> y presenta los conflictos como relaciones individuales armonizables por la ley.</li>
+    <li>Traemos un agente <b>intervenido</b> con Ellacuría, Tapia y Wolkmer para disputar nuestras propias tesis.</li>
+    <li>Regla de la sesión: <b>historizar el instrumento antes de encenderlo.</b></li>
+  </ul>
+</section>
+
+<!-- ============ BLOQUE 2 ============ -->
+<section class="slide divider" data-blk="Bloque 2 · Trípode" data-t="15:00 – 35:00"
+ data-n="<b>20 minutos:</b> María Cobo (Ellacuría y Tapia, 10 min) · Carlos Eduardo (Wolkmer y Correas, 10 min).">
+  <div class="num">2</div>
+  <h2>El trípode teórico de la Clase 10</h2>
+  <div class="time">15:00 – 35:00</div>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="15:00"
+ data-n="<b>María Cobo.</b> La frase que articula toda la sesión. Volver a ella en el cierre.">
+  <p class="tag">Tesis de la sesión</p>
+  <p class="big">La crítica que no retorna a lo concreto <em>se degrada</em>.</p>
+  <ul class="pts" style="margin-top:44px">
+    <li>En <b>ideología</b>, si no se historiza <span>— Ellacuría</span></li>
+    <li>En <b>abstracción inútil</b>, si no vuelve de lo abstracto a lo concreto <span>— Tapia</span></li>
+    <li>En <b>especulación</b>, si confunde teoría crítica con crítica jurídica <span>— Correas, leído por Wolkmer</span></li>
+  </ul>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="16:00 – 21:00"
+ data-n="<b>María Cobo · 5 min.</b> Insistir en el tercer plano, el práxico: es el que casi nunca se hace.">
+  <p class="tag">Pilar 1 · Ignacio Ellacuría (1990)</p>
+  <h2>Historizar los derechos humanos</h2>
+  <ul class="pts">
+    <li>Someter el derecho proclamado a <b>verificación histórica</b>: ¿se traduce en vida y liberación para las mayorías populares?</li>
+    <li>Explicitar siempre <b>desde dónde y para quién</b> se enuncia.</li>
+    <li>Triple plano: <b>epistemológico</b> (verdadero o falso), <b>ético</b> (justo o injusto), <b>práxico</b> (ajustado o desajustado).</li>
+  </ul>
+  <p class="src">«Historización de los derechos humanos desde los pueblos oprimidos y las mayorías populares», ECA 45/502</p>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="21:00 – 25:00"
+ data-n="<b>María Cobo · 4 min.</b> Pedir que cada uno piense ya en qué cara de la crítica está su tesis.">
+  <p class="tag">Pilar 2 · Sergio Tapia Argüello (2018)</p>
+  <h2>Las dos caras de la crítica jurídica</h2>
+  <ul class="pts">
+    <li><b>Negativa:</b> cuestiona los fundamentos del derecho moderno. <b>Transformativa:</b> opera dentro de él para cambiarlo. Se necesitan mutuamente.</li>
+    <li>El derecho moderno es <b>histórico, relacional y jerárquico</b>, y está atado a la reproducción del capitalismo.</li>
+    <li>Riesgos: la transformativa puede <b>legitimar lo que combate</b>; la negativa sola, volverse <b>abstracción</b>.</li>
+  </ul>
+  <p class="src">«La crítica jurídica en América Latina», Nuestrapraxis 2/3</p>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="25:00 – 31:00"
+ data-n="<b>Carlos Eduardo · 6 min.</b> La distinción de Correas es la más útil del día para una tesis doctoral.">
+  <p class="tag">Pilar 3 · Antonio Carlos Wolkmer (2020), sobre Óscar Correas</p>
+  <h2>Crítica jurídica no es teoría crítica</h2>
+  <ul class="pts">
+    <li>La crítica jurídica <b>opera sobre datos concretos</b> y busca una práctica política transformadora; la teoría crítica se mueve en la especulación.</li>
+    <li>La separación entre derecho y política cumple una <b>función ideológica</b>.</li>
+    <li>Horizonte: <b>pluralismo jurídico comunitario-participativo</b> y epistemología descolonial desde el Sur.</li>
+  </ul>
+  <p class="src">«Repensando la crítica. Un homenaje al profesor Óscar Correas», CLACSO</p>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="31:00 – 33:00"
+ data-n="<b>Carlos Eduardo.</b> Repaso rápido: son las herramientas que aparecerán en las tarjetas de las mesas.">
+  <p class="tag">Categorías de apoyo</p>
+  <div class="cols">
+    <div class="col"><h3>Entelman</h3><small>Verdad y objetividad</small><p>Legitiman presentar los conflictos sociales como relaciones individuales armonizables por la ley.</p></div>
+    <div class="col"><h3>Marí</h3><small>El reino del «como si»</small><p>El discurso jurídico monta una escenografía que reproduce el poder aun sin violencia directa.</p></div>
+    <div class="col"><h3>Orler</h3><small>Pedagogía restitutiva</small><p>Disputar el capital jurídico: una hermenéutica de los despojados.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-blk="Bloque 2 · Trípode" data-t="33:00 – 35:00"
+ data-n="<b>Ambos.</b> Puente al laboratorio. Anunciar las mesas en este momento.">
+  <p class="tag">Puente al laboratorio</p>
+  <p class="big">Su tesis, ¿es <em>crítica jurídica</em> o teoría crítica?<br>Nombren el dato concreto sobre el que opera.</p>
+</section>
+
+<!-- ============ BLOQUE 3 ============ -->
+<section class="slide divider" data-blk="Bloque 3 · Laboratorio" data-t="35:00 – 50:00"
+ data-n="<b>Ambos.</b> Las 5 mesas trabajan <b>al mismo tiempo</b>. En Zoom: <b>antes</b> de abrir las 5 salas para grupos pequeños, pegar en el chat el enlace de las tarjetas (ya trae el enlace al documento de posturas). Ya dentro de las salas, el chat principal no se ve: reenviarlo con «Difundir mensaje».">
+  <div class="num">3</div>
+  <h2>Laboratorio de disección en cinco mesas</h2>
+  <div class="time">35:00 – 50:00 · las cinco mesas trabajan a la vez</div>
+</section>
+
+<section class="slide" data-blk="Bloque 3 · Laboratorio" data-t="35:00 – 50:00"
+ data-n="<b>Explicar en 1 minuto.</b> Insistir: hoy no se defiende nada todavía; la defensa es en el bloque 4, ante el Tribunal.">
+  <p class="tag">Cómo funciona el laboratorio</p>
+  <h2>Cada mesa recibe un caso, lo disecciona y llega con una postura</h2>
+  <div class="flow">
+    <div class="fs"><div class="m">3′</div><div class="l"><b>Armar la mesa</b>Entrar a su sala de Zoom, abrir la tarjeta y repartir tres roles.</div></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="m">8′</div><div class="l"><b>Leer y discutir</b>Las citas de la tarjeta y la pregunta de demolición.</div></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="m">4′</div><div class="l"><b>Escribir la postura</b>Tres frases, en el documento compartido de posturas.</div></div>
+    <div class="fa">→</div>
+    <div class="fs out"><div class="m">min 50</div><div class="l"><b>Defenderla</b>El portavoz, ante el Tribunal, en el bloque 4.</div></div>
+  </div>
+</section>
+
+<section class="slide" data-blk="Bloque 3 · Laboratorio" data-t="35:00 – 38:00"
+ data-n="<b>Anunciar las mesas aquí</b>, con el nombre de quien encabeza cada una. Asignar las salas de Zoom en este momento.">
+  <p class="tag">Las cinco mesas · toque su mesa para abrir la tarjeta</p>
+  <div class="mapa" style="flex:none"><a class="mesa" target="_blank" rel="noopener" href="tarjetas.html#mesa-1"><div class="mn">1</div><div class="mt">El aire y la atmósfera como sujeto de protección especial</div><div class="ma">Ellacuría · Tapia Argüello · Wolkmer</div><div class="mq">¿Reconocer al aire como sujeto de derechos cambia la vida de las mayorías, o legitima mercados de carbono?</div></a><a class="mesa" target="_blank" rel="noopener" href="tarjetas.html#mesa-2"><div class="mn">2</div><div class="mt">Derecho a la ciudad y exclusión espacial</div><div class="ma">Entelman · Bourdieu y Foucault (vía Orler)</div><div class="mq">¿La «planificación técnica» urbana es neutral, o expulsa a las mayorías a la periferia?</div></a><a class="mesa" target="_blank" rel="noopener" href="tarjetas.html#mesa-3"><div class="mn">3</div><div class="mt">Movimientos sociales, filosofías de la liberación y minorías parlamentarias</div><div class="ma">Wolkmer · Correas · Ellacuría</div><div class="mq">¿El derecho parlamentario libera al sujeto subalterno, o lo encierra en la jaula monista?</div></a><a class="mesa" target="_blank" rel="noopener" href="tarjetas.html#mesa-4"><div class="mn">4</div><div class="mt">Soberanía y crisis del derecho internacional público</div><div class="ma">Foucault · Marí · Correas</div><div class="mq">¿El derecho internacional es consenso, o la escenografía del «como si» de las potencias?</div></a><a class="mesa" target="_blank" rel="noopener" href="tarjetas.html#mesa-5"><div class="mn">5</div><div class="mt">Soberanía alimentaria en Ecuador e inteligencia artificial en el derecho</div><div class="ma">Tapia Argüello · Bourdieu · Ellacuría · Orler</div><div class="mq">¿Cómo evitar que la ley agraria y los algoritmos consoliden un neocolonialismo extractivo?</div></a></div>
+  <div class="lrow"><a class="lbtn" target="_blank" rel="noopener" href="mesas.html">Tarjetas y documento de posturas ↗</a><span class="lurl">carloseduardochica-art.github.io/clase10-critica-juridica/mesas.html</span></div>
+</section>
+
+<section class="slide" data-blk="Bloque 3 · Laboratorio" data-t="35:00 – 38:00"
+ data-n="Lo que tiene que salir de la mesa. Si una mesa solo trae opiniones, el Tribunal lo va a desarmar.">
+  <p class="tag">Lo que entrega cada mesa</p>
+  <h2>Una postura de tres frases</h2>
+  <div class="plant">
+    <div class="pf"><span>1</span><p><b>El dato concreto.</b> «Nuestra tesis opera sobre…» (un sujeto, un territorio, una norma, un caso).</p></div>
+    <div class="pf"><span>2</span><p><b>El mito que desmontamos.</b> «El derecho dice que…, pero en la realidad…»</p></div>
+    <div class="pf"><span>3</span><p><b>Nuestra respuesta</b> a la pregunta de demolición, con un autor del trípode.</p></div>
+  </div>
+  <div class="lrow" style="margin-top:18px"><a class="lbtn" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">Abrir el documento de posturas ↗</a></div>
+  <div class="roles"><b>Roles:</b> <span>Portavoz</span> defiende · <span>Relator</span> escribe en el documento compartido · <span>Guardián del tiempo</span> controla el reloj</div>
+</section>
+
+<section class="slide" data-blk="Bloque 3 · Laboratorio" data-t="38:00 – 50:00"
+ data-n="<b>Pulsar «Iniciar» al abrir las salas.</b> Las salas no ven la pantalla compartida: usar «Difundir mensaje» al minuto 8 («Pasen a escribir la postura») y al minuto 11 («Queda 1 minuto»). Configurar las salas con cierre automático a los 12 minutos.">
+  <p class="tag">Trabajo en mesas</p>
+  <div class="crono">
+    <div class="cfase" id="cfase">Leer y discutir</div>
+    <div class="cnum" id="cnum">12:00</div>
+    <div class="cbar"><div id="cbar"></div></div>
+    <div class="cleg"><span>8′ leer y discutir</span><span>4′ escribir la postura</span></div>
+    <button class="vbtn" id="cgo" style="align-self:center">Iniciar</button>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 4 ============ -->
+<section class="slide divider" data-blk="Bloque 4 · Tribunal" data-t="50:00 – 85:00"
+ data-n="<b>Ahora sí:</b> abrir el Tribunal y compartir esa ventana. María Cobo modera mesas 1 a 3; Carlos Eduardo, 4 y 5.">
+  <div class="num">4</div>
+  <h2>Confrontación con el Tribunal Epistemológico</h2>
+  <div class="time">50:00 – 85:00 · un turno de 7 minutos por mesa</div>
+</section>
+
+<section class="slide" data-blk="Bloque 4 · Tribunal" data-t="50:00"
+ data-n="Explicar una vez. Después cada mesa tiene su propia diapositiva con su pregunta en pantalla.">
+  <p class="tag">Cómo es cada turno · 7 minutos</p>
+  <div class="flow">
+    <div class="fs"><div class="m">2′</div><div class="l"><b>Portavoz</b>Lee la postura de tres frases.</div></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="m">1′30″</div><div class="l"><b>Tribunal (Profe IA)</b>Diagnóstico de fetichismo, cita de golpe y pregunta de jaque mate.</div></div>
+    <div class="fa">→</div>
+    <div class="fs"><div class="m">3′30″</div><div class="l"><b>Mesa + docentes</b>Contrarréplica de la mesa y síntesis de quien modera.</div></div>
+  </div>
+  <p class="lead" style="margin-top:40px">Orden: Mesa 1 → 2 → 3 (modera María Cobo) → 4 → 5 (modera Carlos Eduardo)</p>
+  <div class="lrow"><a class="lbtn amber" target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka">⚖ Abrir el Tribunal ↗</a><a class="lbtn" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">Documento de posturas ↗</a></div>
+</section>
+
+<section class="slide grupo" data-blk="Bloque 4 · Turno Mesa 1" data-mesa="1" data-t="50:00 – 57:00"
+ data-n="<b>Modera María Cobo.</b> Portavoz 2′ → «Tribunal, evalúa» 1′30″ → contrarréplica 3′30″.">
+  <div class="head"><div class="gn">1</div><div class="gt">El aire y la atmósfera como sujeto de protección especial</div></div>
+  <div class="auth">Ellacuría · Tapia Argüello · Wolkmer</div>
+  <div class="box mito"><b>Mito a desmontar</b>Que declarar normativamente a la atmósfera como sujeto de protección frena por sí solo la devastación, sin tocar las relaciones de acumulación.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>Si el derecho moderno está atado a la reproducción del capitalismo, ¿reconocer al aire como sujeto de derechos transforma la vida de las mayorías, o legitima mercados de carbono mientras las zonas de sacrificio siguen asfixiándose?</div>
+  <div class="turno"><span>Portavoz 2′</span><span>Tribunal 1′30″</span><span>Réplica 3′30″</span><a target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka#mesa-1">⚖ Tribunal · Mesa 1 ↗</a></div>
+</section>
+
+<section class="slide grupo" data-blk="Bloque 4 · Turno Mesa 2" data-mesa="2" data-t="57:00 – 64:00"
+ data-n="<b>Modera María Cobo.</b> Portavoz 2′ → «Tribunal, evalúa» 1′30″ → contrarréplica 3′30″.">
+  <div class="head"><div class="gn">2</div><div class="gt">Derecho a la ciudad y exclusión espacial</div></div>
+  <div class="auth">Entelman · Bourdieu y Foucault (vía Orler)</div>
+  <div class="box mito"><b>Mito a desmontar</b>Tratar el derecho a la ciudad como planificación técnica neutral, separada de la renta del suelo y la segregación de clase.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Cómo usa el derecho urbanístico la máscara de la objetividad técnica para expulsar a las mayorías hacia las periferias y convertir un conflicto estructural en trámites administrativos individuales?</div>
+  <div class="turno"><span>Portavoz 2′</span><span>Tribunal 1′30″</span><span>Réplica 3′30″</span><a target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka#mesa-2">⚖ Tribunal · Mesa 2 ↗</a></div>
+</section>
+
+<section class="slide grupo" data-blk="Bloque 4 · Turno Mesa 3" data-mesa="3" data-t="64:00 – 71:00"
+ data-n="<b>Modera María Cobo.</b> Portavoz 2′ → «Tribunal, evalúa» 1′30″ → contrarréplica 3′30″.">
+  <div class="head"><div class="gn">3</div><div class="gt">Movimientos sociales, filosofías de la liberación y minorías parlamentarias</div></div>
+  <div class="auth">Wolkmer · Correas · Ellacuría</div>
+  <div class="box mito"><b>Mito a desmontar</b>Que la marginación colonial se supera solo con cuotas de representación formal o domesticando a los movimientos sociales.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Puede el derecho parlamentario liberar al sujeto subalterno, o es la jaula monista que neutraliza la insurgencia comunitaria? Y cuando un movimiento choca con una ley aprobada, ¿quién tiene la legitimidad histórica?</div>
+  <div class="turno"><span>Portavoz 2′</span><span>Tribunal 1′30″</span><span>Réplica 3′30″</span><a target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka#mesa-3">⚖ Tribunal · Mesa 3 ↗</a></div>
+</section>
+
+<section class="slide grupo" data-blk="Bloque 4 · Turno Mesa 4" data-mesa="4" data-t="71:00 – 78:00"
+ data-n="<b>Modera Carlos Eduardo.</b> Portavoz 2′ → «Tribunal, evalúa» 1′30″ → contrarréplica 3′30″.">
+  <div class="head"><div class="gn">4</div><div class="gt">Soberanía y crisis del derecho internacional público</div></div>
+  <div class="auth">Foucault · Marí · Correas</div>
+  <div class="box mito"><b>Mito a desmontar</b>Leer la crisis del derecho internacional como simple falta de cumplimiento o de coerción, ocultando su origen asimétrico.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿No es el orden jurídico internacional la máxima expresión de la falsa universalidad y del reino del «como si», donde las potencias disfrazan su geopolítica de consenso?</div>
+  <div class="turno"><span>Portavoz 2′</span><span>Tribunal 1′30″</span><span>Réplica 3′30″</span><a target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka#mesa-4">⚖ Tribunal · Mesa 4 ↗</a></div>
+</section>
+
+<section class="slide grupo" data-blk="Bloque 4 · Turno Mesa 5" data-mesa="5" data-t="78:00 – 85:00"
+ data-n="<b>Modera Carlos Eduardo.</b> Portavoz 2′ → «Tribunal, evalúa» 1′30″ → contrarréplica 3′30″.">
+  <div class="head"><div class="gn">5</div><div class="gt">Soberanía alimentaria en Ecuador e inteligencia artificial en el derecho</div></div>
+  <div class="auth">Tapia Argüello · Bourdieu · Ellacuría · Orler</div>
+  <div class="box mito"><b>Mito a desmontar</b>Que la regulación agroalimentaria y los algoritmos son herramientas técnicas neutrales, sin preguntar quién controla las semillas, los datos y el capital jurídico.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Cómo evitar que el régimen agroalimentario y los algoritmos jurídicos consoliden un neocolonialismo extractivo contra las mayorías populares?</div>
+  <div class="turno"><span>Portavoz 2′</span><span>Tribunal 1′30″</span><span>Réplica 3′30″</span><a target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka#mesa-5">⚖ Tribunal · Mesa 5 ↗</a></div>
+</section>
+
+<!-- ============ BLOQUE 5 ============ -->
+<section class="slide divider" data-blk="Bloque 5 · Cierre" data-t="85:00 – 100:00"
+ data-n="<b>Carlos Eduardo · 8 min.</b> «Copiar dossier» en el Tribunal y pegarlo en el chat de Zoom.">
+  <div class="num">5</div>
+  <h2>Dossier epistemológico y cierre a dos voces</h2>
+  <div class="time">85:00 – 100:00</div>
+  <div class="lrow" style="margin-top:34px"><a class="lbtn amber" target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka">⚖ Tribunal: copiar el dossier ↗</a></div>
+</section>
+
+<section class="slide" data-blk="Bloque 5 · Cierre" data-t="85:00 – 93:00"
+ data-n="<b>Carlos Eduardo.</b> Cada mesa se lleva su matriz para el capítulo teórico.">
+  <p class="tag">Lo que se lleva cada mesa</p>
+  <h2>Una matriz para el capítulo teórico de su tesis</h2>
+  <ul class="pts">
+    <li>El <b>mito normativista</b> que su tesis debe desmontar</li>
+    <li>La exigencia de <b>verificación histórica</b> de Ellacuría</li>
+    <li>La articulación <b>materialista</b> de Tapia, Wolkmer y Correas</li>
+  </ul>
+</section>
+
+<section class="slide" data-blk="Bloque 5 · Cierre" data-t="93:00 – 100:00"
+ data-n="<b>María Cobo</b> abre con Freire; <b>Carlos Eduardo</b> cierra con la soberanía epistémica.">
+  <p class="tag">Cierre a dos voces</p>
+  <p class="big">Historizar el derecho desde Nuestra América es <em>negarse a burocratizar la mente</em>.</p>
+  <p class="lead" style="margin-top:50px">La tecnología nunca es neutral: o se interviene con la epistemología crítica, o los algoritmos serán el nuevo positivismo.</p>
+  <p class="src">Paulo Freire · Carlos Eduardo Chica-Villacís</p>
+</section>
+
+<section class="slide divider" data-blk="Final" data-t="100:00"
+ data-n="Tarea para la próxima sesión.">
+  <p class="tag">Para la próxima sesión</p>
+  <h2>Historicen la categoría central de su tesis en una página</h2>
+  <p class="lead">Desde dónde, para quién, y qué da de sí.</p>
+</section>
+
+  <div id="prog"></div>
+  <div id="hud"><span class="blk" id="hblk"></span><span id="ht"></span><span class="sp"></span><span id="hn"></span></div>
+</div></div>
+
+<div id="ctl">
+  <a href="docentes.html" target="_blank" rel="noopener" title="Panel docente" style="font-size:15px;padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--stage);color:var(--ink);text-decoration:none">Docentes</a>
+  <button id="bm" title="Índice (I)">☰</button>
+  <button id="bn" title="Notas para docentes (N)">Notas</button>
+  <button id="bc" title="Claro / oscuro (C)">◐</button>
+  <button id="bf" title="Pantalla completa (F)">⛶</button>
+  <button class="main" id="bp" title="Anterior (←)">‹</button>
+  <button class="main" id="bx" title="Siguiente (→)">›</button>
+</div>
+<div id="notes"></div>
+<div id="menu"><div class="in"><h4>Ir a</h4><div id="mlist"></div></div></div>
+<div id="help">← → para avanzar · F pantalla completa · N notas · I índice · C contraste</div>
+
+<script>
+(function(){
+  var S=[].slice.call(document.querySelectorAll('.slide')), i=0;
+  var stage=document.getElementById('stage');
+  function fit(){var k=Math.min(innerWidth/1600,innerHeight/900);stage.style.transform='translate(-50%,-50%) scale('+k+')';}
+  addEventListener('resize',fit);fit();
+  function go(n){
+    i=Math.max(0,Math.min(S.length-1,n));
+    S.forEach(function(s,j){s.classList.toggle('on',j===i);});
+    var s=S[i];
+    document.getElementById('hblk').textContent=s.dataset.blk||'';
+    document.getElementById('ht').textContent=s.dataset.t||'';
+    document.getElementById('hn').textContent=(i+1)+' / '+S.length;
+    document.getElementById('prog').style.width=((i+1)/S.length*100)+'%';
+    document.getElementById('notes').innerHTML=s.dataset.n||'';
+    try{localStorage.setItem('lienzo10',i);}catch(e){}
+    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
+  }
+  function next(){go(i+1);} function prev(){go(i-1);}
+  addEventListener('keydown',function(e){
+    if(e.target.tagName==='INPUT')return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();prev();}
+    else if(k==='Home')go(0); else if(k==='End')go(S.length-1);
+    else if(k==='f'||k==='F')full(); else if(k==='n'||k==='N')notes();
+    else if(k==='c'||k==='C')contrast(); else if(k==='i'||k==='I')menu();
+    else if(k==='Escape')document.getElementById('menu').classList.remove('on');
+  });
+  function full(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(function(){});}else{document.exitFullscreen();}}
+  function notes(){document.body.classList.toggle('notas');}
+  function contrast(){document.body.classList.toggle('claro');try{localStorage.setItem('lienzoClaro',document.body.classList.contains('claro')?'1':'0');}catch(e){}}
+  function menu(){document.getElementById('menu').classList.toggle('on');}
+  document.getElementById('bx').onclick=next; document.getElementById('bp').onclick=prev;
+  document.getElementById('bf').onclick=full; document.getElementById('bn').onclick=notes;
+  document.getElementById('bc').onclick=contrast; document.getElementById('bm').onclick=menu;
+  document.getElementById('menu').onclick=function(e){if(e.target.id==='menu')menu();};
+  // indice
+  var ml=document.getElementById('mlist');
+  S.forEach(function(s,j){
+    var t=(s.querySelector('h1,h2,.gt,.big,.tag')||{}).textContent||'';
+    var b=document.createElement('button');
+    b.innerHTML='<span>'+(j+1)+'</span>'+(s.dataset.blk||'')+' — '+t.trim().slice(0,70);
+    b.onclick=function(){go(j);menu();};
+    ml.appendChild(b);
+  });
+  // clic en el escenario avanza (salvo en video y botones)
+  stage.addEventListener('click',function(e){if(e.target.closest('a,video,iframe,button,input'))return;next();});
+  // video local
+  document.getElementById('pick').onclick=function(){document.getElementById('vfile').click();};
+  document.getElementById('vfile').onchange=function(e){var f=e.target.files[0];if(!f)return;var v=document.getElementById('vox');v.src=URL.createObjectURL(f);v.hidden=false;document.getElementById('voxdrive').hidden=true;v.load();};
+
+  // reloj del laboratorio: 8 min lectura + 4 min escritura
+  (function(){var T=720,left=T,id=null,b=document.getElementById('cgo');if(!b)return;
+   function pin(){var m=Math.floor(left/60),x=left%60;document.getElementById('cnum').textContent=m+':'+String(x).padStart(2,'0');
+     document.getElementById('cbar').style.width=((T-left)/T*100)+'%';
+     document.getElementById('cfase').textContent=left===0?'Tiempo: pasamos al Tribunal':(T-left)<480?'Leer y discutir':'Escribir la postura';}
+   b.onclick=function(){if(id){clearInterval(id);id=null;b.textContent='Reanudar';return;}
+     if(left===0){left=T;}id=setInterval(function(){left--;pin();if(left<=0){clearInterval(id);id=null;b.textContent='Reiniciar';}},1000);b.textContent='Pausar';};
+   pin();})();
+  // estado inicial
+  try{if(localStorage.getItem('lienzoClaro')==='1')document.body.classList.add('claro');}catch(e){}
+  var h=parseInt(location.hash.slice(1),10);
+  go(!isNaN(h)?h-1:0);
+})();
+</script>
 </body>
 </html>

@@ -72,6 +72,19 @@ section h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 
 .seg b{display:block;font-size:.88rem;line-height:1.25;margin-top:2px}
 .seg small{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
 .seg.hot{background:var(--violet-soft)}
+
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.start{background:var(--amber);color:var(--on-accent);text-decoration:none;font-weight:700;font-size:1.05rem;padding:14px 22px;border-radius:10px}
+.start:hover{filter:brightness(1.08)}
+.how{color:var(--cyan);font-weight:600;font-size:.92rem;text-decoration:none}
+.como{border-top:1px solid var(--line);padding-block:28px 6px}
+.como h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 4px}
+.pasos{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pasos li{display:grid;grid-template-columns:5.2em 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.pasos .tm{font-family:var(--mono);font-size:.78rem;font-weight:600;color:var(--cyan);padding-top:2px}
+.pasos b{font-size:1rem}
+.pasos p{margin:3px 0 0;color:var(--muted);font-size:.9rem;max-width:72ch}
+kbd{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;color:var(--fg)}
 footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
 
 @media (max-width:860px){main{grid-template-columns:1fr}.bar{flex-direction:column}.seg{border-right:0;border-bottom:1px solid var(--line)}.seg:last-child{border-bottom:0}.seg{flex:none!important}}
@@ -84,6 +97,10 @@ footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
     <h1>Clase 10 · Crítica e <em>historicidad</em> de lo jurídico</h1>
     <p class="thesis">La crítica que no retorna a lo concreto se degrada.</p>
     <p class="who">Codirección: Carlos Eduardo Chica-Villacís y María Cobo · Docente titular: Dr. Marco Tulio Navas Alvear</p>
+    <div class="cta">
+      <a class="start" href="lienzo.html">▶ Iniciar la presentación</a>
+      <a class="how" href="#como">Cómo se usa el lunes ↓</a>
+    </div>
   </div>
 </header>
 
@@ -109,7 +126,7 @@ footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
     <h2 id="h-doc">Para docentes</h2>
     <p class="lede">Lo que se abre y se comparte en Zoom.</p>
     <div class="tools">
-      <a class="tool main" href="lienzo.html"><span class="ic">16:9</span><b>Lienzo de la clase</b><small>Diapositivas con video, reloj del laboratorio y notas (tecla N)</small><span class="ext">→</span></a>
+      <a class="tool main" href="lienzo.html"><span class="ic">16:9</span><b>Presentación de la clase</b><small>Las diapositivas de los 100 minutos, con el video y el reloj</small><span class="ext">→</span></a>
       <a class="tool main" target="_blank" rel="noopener" href="https://claude.ai/artifact/88Nm1RZcGGj6tDVqCDHnka"><span class="ic">IA</span><b>Tribunal Epistemológico</b><small>Profe IA en Claude: pegar la postura y pulsar «Tribunal, evalúa»</small><span class="ext">↗</span></a>
       <a class="tool" target="_blank" rel="noopener" href="https://docs.google.com/document/d/1k9Vsl7b-mFRBeLXdo-Qv2QAYN9qPIoysQ8QCrBY-aLg/edit"><span class="ic">DOC</span><b>Guía para el lunes</b><small>Paso a paso, enlaces y pendientes</small><span class="ext">↗</span></a>
       <a class="tool" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1FYSO983o7z1hVwWJ4yMdnhNY8hzFZ1uy/view"><span class="ic">MP4</span><b>Video Vox</b><small>«La ilusión de la pureza» · 3:30</small><span class="ext">↗</span></a>
@@ -117,6 +134,19 @@ footer{font-size:.75rem;color:var(--muted);padding-block:0 30px}
     <p class="note">El Tribunal funciona dentro de Claude con la cuenta de Carlos Eduardo. Si falla, la misma página tiene el botón «Usar golpes preparados».</p>
   </section>
 </main>
+
+
+<section class="como wrap" id="como" aria-labelledby="h-como">
+  <h2 id="h-como">Cómo se usa el lunes</h2>
+  <p class="lede">Una sola regla: <b>la presentación manda</b>. Se comparte en Zoom desde el inicio y las demás piezas se abren solo cuando la presentación lo indica.</p>
+  <ol class="pasos">
+    <li><span class="tm">Antes</span><div><b>Abrir tres pestañas</b><p>Esta página, la presentación y el Tribunal. En Zoom: compartir la pestaña de la presentación y pedir en el chat que cada uno se renombre «M1 – Nombre».</p></div></li>
+    <li><span class="tm">00–35</span><div><b>Presentación</b><p>Avanzar con las flechas del teclado. La tecla <kbd>F</kbd> pone pantalla completa y <kbd>N</kbd> muestra las notas para docentes. El video está en la diapositiva 4.</p></div></li>
+    <li><span class="tm">35–50</span><div><b>Laboratorio en salas</b><p>Pegar en el chat el enlace de esta página. Abrir 5 salas de Zoom de 12 minutos. Cada mesa abre su tarjeta y su relator escribe la postura en el documento compartido. En la presentación queda el reloj de 12 minutos.</p></div></li>
+    <li><span class="tm">50–85</span><div><b>Tribunal</b><p>Por cada mesa: el portavoz lee su postura (2′). Se cambia a la pestaña del Tribunal, se pega la postura copiada del documento y se pulsa «Tribunal, evalúa» (1′30″). La mesa replica (3′30″).</p></div></li>
+    <li><span class="tm">85–100</span><div><b>Cierre</b><p>Volver a la presentación. En el Tribunal, «Copiar dossier» y pegarlo en el chat de Zoom.</p></div></li>
+  </ol>
+</section>
 
 <section class="agenda wrap" aria-labelledby="h-ag">
   <h2 id="h-ag">La sesión en 100 minutos</h2>

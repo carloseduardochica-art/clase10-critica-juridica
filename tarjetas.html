@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarjetas de mesa · Clase 10</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+html,body{margin:0}
+/* Layout: navegación fija por mesa; una tarjeta por mesa, una debajo de otra */
+:root{--bg:#EEF0F6;--card:#FFFFFF;--fg:#121933;--muted:#4F5A7A;--line:#D3D9E8;--cyan:#0A6FAE;--violet:#5A3FD0;--violet-soft:#EEEAFC;--amber:#9A5A00;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",Arial,Helvetica,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080C1C;--card:#0F1631;--fg:#EEF2FF;--muted:#9CA8CA;--line:#27315A;--cyan:#45D3FF;--violet:#A08BFF;--violet-soft:#1D1A44;--amber:#F5B84A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#080C1C;--card:#0F1631;--fg:#EEF2FF;--muted:#9CA8CA;--line:#27315A;--cyan:#45D3FF;--violet:#A08BFF;--violet-soft:#1D1A44;--amber:#F5B84A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav a.home{border:0;padding:5px 4px;color:var(--muted)}
+nav b{font-family:var(--serif);font-weight:400;font-size:1.05rem;margin-right:auto}
+nav a{font-size:.85rem;font-weight:600;color:var(--violet);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+nav a:hover,nav a:focus-visible{border-color:var(--violet);outline:none}
+main{padding-block:6px 30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.intro{max-width:780px;margin:16px auto 0;color:var(--muted);font-size:.92rem}
+.card{background:var(--card);max-width:780px;margin:16px auto;padding:26px 30px;border-radius:10px;border:1px solid var(--line)}
+header{display:flex;gap:16px;align-items:flex-start;border-bottom:2px solid var(--violet);padding-bottom:12px}
+.n{font-family:var(--serif);font-size:58px;line-height:.9;color:var(--violet)}
+.k{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.2;margin:4px 0;text-wrap:balance}
+.a{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0 10px;font-size:.8rem}
+.steps div{border:1px solid var(--line);border-radius:6px;padding:6px 8px} .steps b{display:block;font-size:1rem;color:var(--cyan)} .steps .o b{color:var(--amber)}
+.roles{display:flex;gap:14px;font-size:.8rem;color:var(--muted);flex-wrap:wrap} .roles b{color:var(--fg)}
+h2{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin:18px 0 8px}
+.q{border-left:3px solid var(--cyan);padding:2px 0 2px 12px;margin-bottom:10px} .q p{margin:0;font-family:var(--serif);font-size:1rem;line-height:1.5}
+.q cite{display:block;font-style:normal;font-size:.75rem;color:var(--muted);margin-top:3px}
+.q.par{border-left-color:var(--line)} .q.par p{font-family:var(--sans);font-style:italic;color:var(--muted);font-size:.95rem} .q.par cite::before{content:"Paráfrasis · ";color:var(--amber)}
+.box{border-radius:6px;padding:10px 14px;font-size:.95rem;line-height:1.5;margin-bottom:8px}
+.box b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+.mito{border:1px solid var(--line);color:var(--muted)} .mito b{color:var(--amber)}
+.dem{background:var(--violet-soft);border-left:4px solid var(--violet);font-family:var(--serif);font-size:1.05rem} .dem b{font-family:var(--sans);color:var(--violet)}
+.tpl{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.send{margin:12px 0 0;font-size:.9rem;background:var(--violet-soft);border-radius:6px;padding:8px 12px}
+.send a,.docline a{color:var(--violet);font-weight:600}
+.docline{color:var(--fg)}
+.tip{font-size:.78rem;color:var(--muted);margin-top:14px;border-top:1px dashed var(--line);padding-top:8px}
+@media (max-width:600px){.card{padding:20px 16px}.steps{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav aria-label="Mesas"><a class="home" href="./">← Inicio</a><b>Clase 10 · Tarjetas de mesa</b><a href="#mesa-1">Mesa 1</a><a href="#mesa-2">Mesa 2</a><a href="#mesa-3">Mesa 3</a><a href="#mesa-4">Mesa 4</a><a href="#mesa-5">Mesa 5</a></nav>
+<main>
+<p class="intro">Busquen su mesa con los botones de arriba. Tienen 12 minutos en su sala de Zoom: 8 para leer y discutir, 4 para escribir la postura.</p>
+<p class="intro docline">La postura se escribe en el documento compartido: <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">Abrir el documento de posturas</a></p>
+<article class="card" id="mesa-1">
+  <header><div class="n">1</div><div><p class="k">Clase 10 · Laboratorio de disección · Mesa 1</p><h1>El aire y la atmósfera como sujeto de protección especial</h1><p class="a">Ellacuría · Tapia Argüello · Wolkmer</p></div></header>
+  <div class="steps"><div><b>3′</b> Armar la mesa y repartir roles</div><div><b>8′</b> Leer y discutir</div><div><b>4′</b> Escribir la postura</div><div class="o"><b>Bloque 4</b> El portavoz la defiende ante el Tribunal (2′)</div></div>
+  <div class="roles"><span><b>Portavoz</b> defiende la postura</span><span><b>Relator</b> la escribe</span><span><b>Guardián del tiempo</b> controla el reloj</span></div>
+  <h2>1 · Lean</h2><div class="lq"><div class="q"><p>«… se analizan algunas características del derecho moderno, para establecer la necesidad de observar su carácter histórico, relacional y jerárquico, así como su vinculación con el capitalismo.»</p><cite>Sergio Tapia Argüello (2018), «La crítica jurídica en América Latina»</cite></div>
+    <div class="q"><p>«… develar y debatir los usos estratégicos del derecho que llevan a cabo los actores sociales: movimientos sociales, sociedad civil, Estado y el capital, en relación a la política y la economía…»</p><cite>GT CLACSO «Crítica jurídica y conflictos sociopolíticos», en Wolkmer (2020)</cite></div>
+    <div class="q par"><p>Historizar exige contrastar el derecho proclamado con su verificación material en la vida de las mayorías populares.</p><cite>Ignacio Ellacuría (1990)</cite></div></div>
+  <h2>2 · Discutan</h2>
+  <div class="box mito"><b>Mito a desmontar</b>Que declarar normativamente a la atmósfera como sujeto de protección frena por sí solo la devastación, sin tocar las relaciones de acumulación.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>Si el derecho moderno está atado a la reproducción del capitalismo, ¿reconocer al aire como sujeto de derechos transforma la vida de las mayorías, o legitima mercados de carbono mientras las zonas de sacrificio siguen asfixiándose?</div>
+  <h2>3 · Escriban su postura (tres frases)</h2><ol class="tpl"><li><b>El dato concreto.</b> Nuestra tesis opera sobre…</li><li><b>El mito que desmontamos.</b> El derecho dice que…, pero en la realidad…</li><li><b>Nuestra respuesta</b> a la pregunta de demolición, con Ellacuría, Tapia o Wolkmer/Correas…</li></ol><p class="send">El relator escribe la postura en el <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">documento de posturas</a>, en la sección de su mesa.</p><p class="tip">El Tribunal buscará: categorías sin sujeto ni territorio · neutralidad técnica sin historizar · «crítica» sin un dato concreto.</p>
+</article><article class="card" id="mesa-2">
+  <header><div class="n">2</div><div><p class="k">Clase 10 · Laboratorio de disección · Mesa 2</p><h1>Derecho a la ciudad y exclusión espacial</h1><p class="a">Entelman · Bourdieu y Foucault (vía Orler)</p></div></header>
+  <div class="steps"><div><b>3′</b> Armar la mesa y repartir roles</div><div><b>8′</b> Leer y discutir</div><div><b>4′</b> Escribir la postura</div><div class="o"><b>Bloque 4</b> El portavoz la defiende ante el Tribunal (2′)</div></div>
+  <div class="roles"><span><b>Portavoz</b> defiende la postura</span><span><b>Relator</b> la escribe</span><span><b>Guardián del tiempo</b> controla el reloj</span></div>
+  <h2>1 · Lean</h2><div class="lq"><div class="q"><p>«… los procesos históricos de “objetivación y monopolización de saberes”, y de “construcción disciplinar” que confluyeron en el despojo del conocimiento jurídico a la sociedad civil…»</p><cite>José Orler (2022), a partir de Bourdieu y Foucault</cite></div>
+    <div class="q par"><p>Las creencias de los juristas sobre la verdad y la objetividad legitiman presentar los conflictos sociales como relaciones individuales armonizables por el derecho.</p><cite>Ricardo Entelman, en la lectura de Wolkmer</cite></div></div>
+  <h2>2 · Discutan</h2>
+  <div class="box mito"><b>Mito a desmontar</b>Tratar el derecho a la ciudad como planificación técnica neutral, separada de la renta del suelo y la segregación de clase.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Cómo usa el derecho urbanístico la máscara de la objetividad técnica para expulsar a las mayorías hacia las periferias y convertir un conflicto estructural en trámites administrativos individuales?</div>
+  <h2>3 · Escriban su postura (tres frases)</h2><ol class="tpl"><li><b>El dato concreto.</b> Nuestra tesis opera sobre…</li><li><b>El mito que desmontamos.</b> El derecho dice que…, pero en la realidad…</li><li><b>Nuestra respuesta</b> a la pregunta de demolición, con Ellacuría, Tapia o Wolkmer/Correas…</li></ol><p class="send">El relator escribe la postura en el <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">documento de posturas</a>, en la sección de su mesa.</p><p class="tip">El Tribunal buscará: categorías sin sujeto ni territorio · neutralidad técnica sin historizar · «crítica» sin un dato concreto.</p>
+</article><article class="card" id="mesa-3">
+  <header><div class="n">3</div><div><p class="k">Clase 10 · Laboratorio de disección · Mesa 3</p><h1>Movimientos sociales, filosofías de la liberación y minorías parlamentarias</h1><p class="a">Wolkmer · Correas · Ellacuría</p></div></header>
+  <div class="steps"><div><b>3′</b> Armar la mesa y repartir roles</div><div><b>8′</b> Leer y discutir</div><div><b>4′</b> Escribir la postura</div><div class="o"><b>Bloque 4</b> El portavoz la defiende ante el Tribunal (2′)</div></div>
+  <div class="roles"><span><b>Portavoz</b> defiende la postura</span><span><b>Relator</b> la escribe</span><span><b>Guardián del tiempo</b> controla el reloj</span></div>
+  <h2>1 · Lean</h2><div class="lq"><div class="q"><p>«… se hace imperiosa la necesaria interacción del pluralismo jurídico con los procesos alternativos del poder, como interregno democrático de lo “comunitario-participativo”.»</p><cite>Antonio Carlos Wolkmer, «Ensayos de teoría del derecho y filosofía política»</cite></div>
+    <div class="q"><p>«… una postura actuante y comprometida con el proyecto del “nuevo” derecho, transformado en instancia al servicio de la justicia, de la liberación y de la dignificación del “otro” en cuanto sujeto subalterno insurgente.»</p><cite>Antonio Carlos Wolkmer (2017), «Teoría crítica del derecho desde América Latina»</cite></div></div>
+  <h2>2 · Discutan</h2>
+  <div class="box mito"><b>Mito a desmontar</b>Que la marginación colonial se supera solo con cuotas de representación formal o domesticando a los movimientos sociales.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Puede el derecho parlamentario liberar al sujeto subalterno, o es la jaula monista que neutraliza la insurgencia comunitaria? Y cuando un movimiento choca con una ley aprobada, ¿quién tiene la legitimidad histórica?</div>
+  <h2>3 · Escriban su postura (tres frases)</h2><ol class="tpl"><li><b>El dato concreto.</b> Nuestra tesis opera sobre…</li><li><b>El mito que desmontamos.</b> El derecho dice que…, pero en la realidad…</li><li><b>Nuestra respuesta</b> a la pregunta de demolición, con Ellacuría, Tapia o Wolkmer/Correas…</li></ol><p class="send">El relator escribe la postura en el <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">documento de posturas</a>, en la sección de su mesa.</p><p class="tip">El Tribunal buscará: categorías sin sujeto ni territorio · neutralidad técnica sin historizar · «crítica» sin un dato concreto.</p>
+</article><article class="card" id="mesa-4">
+  <header><div class="n">4</div><div><p class="k">Clase 10 · Laboratorio de disección · Mesa 4</p><h1>Soberanía y crisis del derecho internacional público</h1><p class="a">Foucault · Marí · Correas</p></div></header>
+  <div class="steps"><div><b>3′</b> Armar la mesa y repartir roles</div><div><b>8′</b> Leer y discutir</div><div><b>4′</b> Escribir la postura</div><div class="o"><b>Bloque 4</b> El portavoz la defiende ante el Tribunal (2′)</div></div>
+  <div class="roles"><span><b>Portavoz</b> defiende la postura</span><span><b>Relator</b> la escribe</span><span><b>Guardián del tiempo</b> controla el reloj</span></div>
+  <h2>1 · Lean</h2><div class="lq"><div class="q"><p>«Se trata de una historicidad dispuesta en el espacio epistemológico […] que opera fundamentalmente particularizando y reduciendo […] uno de los caracteres más distorsivos del discurso jurídico: su pretensión de universalidad.»</p><cite>José Orler (2022), a partir de Foucault (2003)</cite></div>
+    <div class="q"><p>«… homogeneizando y asegurando los efectos de la fuerza y la violencia aún en su ausencia, y montando la escenografía del reino del “como si”, que impera para reproducción y continuidad del poder.»</p><cite>José Orler (2022), citando a Enrique Marí (1988)</cite></div></div>
+  <h2>2 · Discutan</h2>
+  <div class="box mito"><b>Mito a desmontar</b>Leer la crisis del derecho internacional como simple falta de cumplimiento o de coerción, ocultando su origen asimétrico.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿No es el orden jurídico internacional la máxima expresión de la falsa universalidad y del reino del «como si», donde las potencias disfrazan su geopolítica de consenso?</div>
+  <h2>3 · Escriban su postura (tres frases)</h2><ol class="tpl"><li><b>El dato concreto.</b> Nuestra tesis opera sobre…</li><li><b>El mito que desmontamos.</b> El derecho dice que…, pero en la realidad…</li><li><b>Nuestra respuesta</b> a la pregunta de demolición, con Ellacuría, Tapia o Wolkmer/Correas…</li></ol><p class="send">El relator escribe la postura en el <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">documento de posturas</a>, en la sección de su mesa.</p><p class="tip">El Tribunal buscará: categorías sin sujeto ni territorio · neutralidad técnica sin historizar · «crítica» sin un dato concreto.</p>
+</article><article class="card" id="mesa-5">
+  <header><div class="n">5</div><div><p class="k">Clase 10 · Laboratorio de disección · Mesa 5</p><h1>Soberanía alimentaria en Ecuador e inteligencia artificial en el derecho</h1><p class="a">Tapia Argüello · Bourdieu · Ellacuría · Orler</p></div></header>
+  <div class="steps"><div><b>3′</b> Armar la mesa y repartir roles</div><div><b>8′</b> Leer y discutir</div><div><b>4′</b> Escribir la postura</div><div class="o"><b>Bloque 4</b> El portavoz la defiende ante el Tribunal (2′)</div></div>
+  <div class="roles"><span><b>Portavoz</b> defiende la postura</span><span><b>Relator</b> la escribe</span><span><b>Guardián del tiempo</b> controla el reloj</span></div>
+  <h2>1 · Lean</h2><div class="lq"><div class="q"><p>«La tarea de disputar el capital jurídico —decimos con Bourdieu y Teubner— a sus detentadores legitimados, que haciendo uso de la fuerza simbólica del Derecho han universalizado intereses de clase…»</p><cite>José Orler (2022)</cite></div>
+    <div class="q par"><p>Tapia analiza las estructuras de poder en la academia y cómo inciden en la construcción del objeto de estudio jurídico.</p><cite>Sergio Tapia Argüello (2018)</cite></div></div>
+  <h2>2 · Discutan</h2>
+  <div class="box mito"><b>Mito a desmontar</b>Que la regulación agroalimentaria y los algoritmos son herramientas técnicas neutrales, sin preguntar quién controla las semillas, los datos y el capital jurídico.</div>
+  <div class="box dem"><b>Pregunta de demolición</b>¿Cómo evitar que el régimen agroalimentario y los algoritmos jurídicos consoliden un neocolonialismo extractivo contra las mayorías populares?</div>
+  <h2>3 · Escriban su postura (tres frases)</h2><ol class="tpl"><li><b>El dato concreto.</b> Nuestra tesis opera sobre…</li><li><b>El mito que desmontamos.</b> El derecho dice que…, pero en la realidad…</li><li><b>Nuestra respuesta</b> a la pregunta de demolición, con Ellacuría, Tapia o Wolkmer/Correas…</li></ol><p class="send">El relator escribe la postura en el <a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1KLpDUv1b1PEQRcb6OfZnleEe-FLP3AAd4OgFvoUuVcA/edit">documento de posturas</a>, en la sección de su mesa.</p><p class="tip">El Tribunal buscará: categorías sin sujeto ni territorio · neutralidad técnica sin historizar · «crítica» sin un dato concreto.</p>
+</article>
+</main>
+</body>
+</html>
